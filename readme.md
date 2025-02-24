@@ -1,8 +1,6 @@
-# Table of Content
-
 Česky
 
-- [NULL a SQL](./sql_and_null_cs.md)
+- [NULL a SQL](./articles//sql_and_null_cs.md)
 
 English
 

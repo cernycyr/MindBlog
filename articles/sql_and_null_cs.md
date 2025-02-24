@@ -62,9 +62,6 @@ Pravděpodobně jsme se někde dozvěděli, že si máme dát pozor na `NULL`. N
 SELECT * FROM stuff where source = NULL
 ```
 
-| name | source |
-| ---- | ------ |
-
 Nic se nevrátí. No ale v tabulce máme záznamy s prázdnou hodnotou. Kde je Bob, David a Jack? Proč se nic nevrátilo?
 
 Protože NULL není roven NULL. ... hm?
