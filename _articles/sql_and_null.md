@@ -1,8 +1,12 @@
-# NULL a SQL
+---
+title: SQL a NULL
+layout: article
+date: 2025-02-25
+---
 
-Většina z nás zná `null` (nebo `nil`). A samozřejmě také víme, že v SQL je také `NULL` pro reprezentaci absence hodnoty. Žádné velké překvapení.
+Jak v SQL porovnáváme NULL hodnoty? Opravdu si vystačíme s `IS (NOT) NULL`? Nemůže nás `NULL` nemile překvapit?
 
-Také si mnozí pamatujeme ze škol či různých školení a studijních materiálů, že si na NULL v SQL máme dát pozor, protože se může chovat... "neintuitivně". Co to ale znamená?
+Mnozí si jistě pamatují ze škol či různých školení a studijních materiálů, že si na NULL v SQL máme dát pozor, protože se může chovat... "neintuitivně". Co to ale znamená?
 
 Vytvořme si jednoduchou tabulku a rovnou přidáme nějaká data
 
@@ -170,7 +174,7 @@ Vyber všechny osoby, které jsou z telefonické kampaně
 
 Jednoduché. Nic s `NULL`, že jsem v pohodě.
 
-```SQL
+```sql
 SELECT name, source FROM stuff WHERE source = 'phone';
 ```
 
@@ -190,7 +194,7 @@ Vyber všechny osoby, které NEjsou z telefonické kampaně.
 
 Řeknete si. Dobře, to je přece "super easy, barely an inconvenience". Doslova negace výrazu! Opět neporovnáváme s `NULL`, takže pohoda.
 
-```SQL
+```sql
 SELECT name, source FROM stuff WHERE source != 'phone';
 ```
 
@@ -205,7 +209,7 @@ Dostal jsem výsledek, nejsou tam záznamy s 'phone'. To vypadá dobře. Všichn
 
 Pokud spojíme 2 předchozí výsledky, dostaneme
 
-```SQL
+```sql
 
 SELECT name, source FROM stuff WHERE source = 'phone'
 UNION
@@ -224,7 +228,7 @@ SELECT name, source FROM stuff WHERE source != 'phone';
 
 Když si ale necháme vypsat vše:
 
-```SQL
+```sql
 SELECT name, source FROM stuff;
 ```
 
@@ -251,7 +255,7 @@ Dobrá. Co dělat, když chceme správný výsledek pro zadání:
 Vyber všechny osoby, které NEjsou z telefonické kampaně.
 ```
 
-```SQL
+```sql
 SELECT name, source FROM stuff WHERE source != 'phone' OR source IS NULL;
 ```
 
@@ -267,7 +271,7 @@ SELECT name, source FROM stuff WHERE source != 'phone' OR source IS NULL;
 
 Toto je možné řešení, ale opravdu mám všude psát `IS (NOT) NULL`, když je ve sloupci možné `NULL`? Ne nutně. Samozřejmě že SQL obsahuje syntax, která nám mohla ušetřit problémy:
 
-```SQL
+```sql
 SELECT name, source FROM stuff WHERE source IS DISTINCT FROM 'phone';
 ```
 

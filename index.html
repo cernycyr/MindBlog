@@ -1,0 +1,26 @@
+---
+layout: default
+title: Náhodné texty o náhodných tématech
+---
+
+<h1>{{page.title}}</h1>
+
+<p>
+  Moc tu toho není, co? Možná se to rozšíří. A možná taky ne. Třeba se tu něco
+  ukáže když bude potřeba si sepsat poznámky po náhodných experimentech.
+</p>
+
+<hr />
+
+<ul class="card-list">
+  {% for item in site.articles reversed %}
+  <li class="card">
+    <a href="{{ item.url }}">
+      <div class="card-content">
+        <h2 class="no-anchor">{{ item.title }}</h2>
+        <p>{{ item.excerpt }}</p>
+      </div>
+    </a>
+  </li>
+  {% endfor %}
+</ul>

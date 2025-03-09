@@ -1,0 +1,7 @@
+theme: jekyll-theme-primer
+
+lang: cs
+
+collections:
+  articles:
+    output: true
