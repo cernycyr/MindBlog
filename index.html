@@ -15,7 +15,7 @@ title: Náhodné texty o náhodných tématech
 <ul class="card-list">
   {% for item in site.articles reversed %}
   <li class="card">
-    <a href="{{ item.url }}">
+    <a href="{{ item.url | relative_url }}">
       <div class="card-content">
         <h2 class="no-anchor">{{ item.title }}</h2>
         <p>{{ item.excerpt }}</p>
