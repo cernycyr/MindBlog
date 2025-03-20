@@ -68,12 +68,11 @@ SELECT * FROM stuff where source = NULL
 
 Nic se nevrátí. No ale v tabulce máme záznamy s prázdnou hodnotou. Kde je Bob, David a Jack? Proč se nic nevrátilo?
 
-Protože NULL není roven NULL. ... hm?
-
-Budeme trochu experimentovat se SELECT.
+Protože NULL není roven NULL. ... hm? Pojďme si trochu zaexperimentovat. Použijeme jednoduchý select a podíváme se, jak vypadají booleany.
 
 ```sql
 select true as result;
+
  result
 --------
  t
@@ -83,7 +82,8 @@ select true as result;
 Ok. True je "t" a False bude "f". Co `NULL`?
 
 ```sql
-select null as result;
+select NULL as result;
+
  result
 --------
 
@@ -93,33 +93,59 @@ Nic. Tedy `NULL`. Dobře. To zatím nic nevysvětluje a jen jsme si ukázali jak
 
 ```sql
 select true = true as result;
- result
---------
- t
 
-select 'web' = 'web' as result;
  result
 --------
  t
 ```
 
-Dobrý. Booleany a Stringy je možné porovnávat samo se sebou a výsledky nás nepřekvapí.
+```sql
+select 'web' = 'web' as result;
+
+ result
+--------
+ t
+```
+
+```sql
+select 'web' = 'email' as result;
+
+ result
+--------
+ f
+```
+
+```sql
+select true = false as result;
+
+ result
+--------
+ f
+```
+
+Dobrý. Booleany a Stringy je možné porovnávat a výsledky nás nepřekvapí. Přidáme `NULL`.
 
 ```sql
 select false = NULL as result;
+
  result
 --------
 
+```
 
+```sql
 select NULL = true as result;
+
  result
 --------
 
+```
 
+```sql
 select 'web' = NULL as result;
+
  result
 --------
-
 
 ```
 
@@ -127,12 +153,17 @@ Divný. Ale proč ne. Jakmile se nám v operandech objeví NULL, tak se výslede
 
 ```sql
 select NULL = NULL as result;
+
  result
 --------
 
 ```
 
-Ohh. Takže "NULLování" platí i pro takový případ. Ok. Proto nás asi všechny možné kurzy učí `IS NULL`
+Ohh. Takže "NULLování" platí i pro takový případ. Ok. To je poměrně důležité.
+
+Aby dotaz vrátil řádek, musí podmínka vrátit `true` (`t`). Cokoliv jiného řádek odfiltruje. Tedy pokud vyjde`false`, podmínka neplatí a logicky se řádek nevrátí. Pokud ale vyjde `NULL`, znamená to, že je výsledek "neznámý" a řádek se také nevrátí.
+
+Proto nás asi všechny možné kurzy učí `IS NULL`
 
 ```sql
 SELECT name, source FROM stuff WHERE source IS NULL;
@@ -172,7 +203,7 @@ Tak si sedneme ke svým tabulkám a začneme vesele bouchat dotazy. Jeden z nich
 Vyber všechny osoby, které jsou z telefonické kampaně
 ```
 
-Jednoduché. Nic s `NULL`, že jsem v pohodě.
+Jednoduché. Nic s `NULL`, takže jsem v pohodě.
 
 ```sql
 SELECT name, source FROM stuff WHERE source = 'phone';
@@ -186,7 +217,7 @@ SELECT name, source FROM stuff WHERE source = 'phone';
 
 A to je v pořádku. Všichni jsou spokojeni.
 
-Nyní chce opačný výsledek. Aneb přijde zadání:
+Nyní bychom chtěli opačný výsledek. Aneb přijde zadání:
 
 ```text
 Vyber všechny osoby, které NEjsou z telefonické kampaně.
@@ -293,4 +324,4 @@ Jaké má být ponaučení?
 
 Na `NULL` si musíme dávat pozor nejen když jej porovnáváme "přímo" (`source = NULL` vs `source IS NULL`), ale také když jej porovnáváme "nepřímo" (`source != 'phone'` vs. `source IS DISTINCT FROM 'phone'`). Pokaždé, když pracujeme s nullable sloupcem a jeho daty bychom měli pracovat s jeho řádky jak s `NULL` samotným.
 
-A protože používáme různé ORM. Dejte si pozor, co dělají vaše oblíbené ORM z takovými dotazy. Překládají je "správně", nebo "naivně"?
+A protože používáme různá ORM. Dejme si pozor, co dělají s takovými dotazy. Překládají je "správně", nebo "naivně"? Čteme náležitě dokumentaci? Používáme je správně?

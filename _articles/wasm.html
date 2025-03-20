@@ -1,0 +1,25 @@
+---
+layout: article
+title: Ruby a WASM
+---
+
+<p>Hrátky s Ruby WASM. Aneb Ruby rovnou v prohlížeči k vyzkoušení.</p>
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.js"></script>
+<script type="module" src="{{ "assets/wasi.js" | absolute_url }}"></script>
+
+<p>Několik scriptů je už načteno.</p>
+
+<h2>WASI</h2>
+
+<p>Po kliknutí se stáhne a zkompiluje Ruby. Ten nejprimitivnější příklad s použitím xterm.js a <a href="https://github.com/ruby/ruby.wasm/blob/main/docs/cheat_sheet.md">Ruby WASM WASI</a></p>
+
+<button id="enable-wasi">Enable</button>
+<div id="wasi-container"></div>
+
+
+
