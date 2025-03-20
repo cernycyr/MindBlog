@@ -3,6 +3,10 @@
 
 @import "{{ site.theme }}";
 
+.markdown-body ul.card-list {
+  padding-left: unset;
+}
+
 .card-list {
   list-style-type: none;
   padding: 0;
