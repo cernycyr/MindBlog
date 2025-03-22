@@ -1,0 +1,44 @@
+.ruby-playground {
+  margin: 20px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.editor-header {
+  padding: 10px;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.editor-header h3 {
+  margin: 0;
+}
+#ruby-editor {
+  height: 300px;
+}
+.output-container {
+  background: #f8f8f8;
+  border-top: 1px solid #ddd;
+  padding: 10px;
+}
+.output-header {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+#ruby-output {
+  margin: 0;
+  min-height: 40px;
+  background: #f0f0f0;
+  padding: 10px;
+  border-radius: 3px;
+  white-space: pre-wrap;
+}
+#run-ruby {
+  background: #cc342d;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 15px;
+  cursor: pointer;
+}
