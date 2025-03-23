@@ -1,27 +1,21 @@
-import { DefaultRubyVM } from "https://cdn.jsdelivr.net/npm/@ruby/wasm-wasi@2.7.1/dist/browser/+esm";
+import { Ruby } from "./ruby.js";
+
+import "https://cdn.jsdelivr.net/npm/xterm/lib/xterm.js";
 
 class RubyTerminal {
   constructor(containerId) {
     this.containerId = containerId;
     this.term = null;
-    this.ruby = null;
     this.init();
   }
 
   async init() {
-    await this.loadRubyWasm();
-    this.createTerminal();
-  }
+    const xTermCSS = document.createElement("link");
+    xTermCSS.rel = "stylesheet";
+    xTermCSS.href = "https://cdn.jsdelivr.net/npm/xterm/css/xterm.css";
+    document.head.appendChild(xTermCSS);
 
-  async loadRubyWasm() {
-    console.log("Loading Ruby WASM...");
-    const response = await fetch(
-      "https://cdn.jsdelivr.net/npm/@ruby/3.4-wasm-wasi@2.7.1/dist/ruby+stdlib.wasm",
-    );
-    const module = await WebAssembly.compileStreaming(response);
-    const { vm } = await DefaultRubyVM(module);
-    this.ruby = vm;
-    console.log("Ruby WASM Loaded.");
+    this.createTerminal();
   }
 
   createTerminal() {
@@ -38,7 +32,7 @@ class RubyTerminal {
     });
 
     this.term.open(container);
-    this.term.write("Hello there.\r\n> ");
+    this.term.write('Ruby "almost terminal".\r\n> ');
     this.handleInput();
   }
 
@@ -65,16 +59,12 @@ class RubyTerminal {
 
   runRuby(code) {
     try {
-      const result = this.ruby.eval(code);
-      this.term.write(result + "\r\n");
+      const result = Ruby.eval(code);
+      this.term.write(result[1] + "\r\n");
     } catch (err) {
       this.term.write("Error: " + err.message + "\r\n");
     }
   }
 }
 
-const wasiButton = document.getElementById("enable-wasi");
-wasiButton.addEventListener("click", () => {
-  new RubyTerminal("wasi-container");
-  wasiButton.remove();
-});
+new RubyTerminal("wasi-container");

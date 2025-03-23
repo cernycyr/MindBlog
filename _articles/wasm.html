@@ -5,26 +5,24 @@ title: Ruby a WASM
 
 <p>Hrátky s Ruby WASM. Aneb Ruby rovnou v prohlížeči k vyzkoušení.</p>
 
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css"
-/>
-<link rel="stylesheet" href="{{ "assets/css/editor.css" | absolute_url }}">
-<script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.js"></script>
-<script type="module" src="{{ "assets/wasi.js" | absolute_url }}"></script>
-<script type="module" src="{{ "assets/editor.js" | absolute_url }}"></script>
+<h2>"Terminál" s WASI</h2>
 
-<p>Několik scriptů je už načteno.</p>
+<p>Jednoduchý příklad s použitím <a href="https://github.com/xtermjs/xterm.js">xterm.js</a> a <a href="https://github.com/ruby/ruby.wasm/blob/main/docs/cheat_sheet.md">Ruby WASM WASI</a>.</p> Žádné složitosti. Nic chytrého. A obecně prostě nic moc. Standard output je v konzoli.
 
-<h2>Terminál s WASI</h2>
-
-<p>Po kliknutí se stáhne a zkompiluje Ruby. Jednoduchý příklad s použitím <a href="https://github.com/xtermjs/xterm.js">xterm.js</a> a <a href="https://github.com/ruby/ruby.wasm/blob/main/docs/cheat_sheet.md">Ruby WASM WASI</a>.</p> Žádné složitosti. Nic chytrého.
-
-<button id="enable-wasi">Enable</button>
 <div id="wasi-container"></div>
+<script type="module" src="{{ "assets/wasi.js" | absolute_url }}"></script>
+
+<p> Tož.. stále to není IRB. </p>
 
 <h2>Editor s WASI</h2>
 
 A nebo můmžeme zkusit editor, kde si v klidu něco napíšeme a až budeme hotovi, tak to spustíme. Používá se <a href="https://codemirror.net/!">CodeMirror</a> a opět <a href="https://github.com/ruby/ruby.wasm/blob/main/docs/cheat_sheet.md">Ruby WASM WASI</a>.
 
+<link rel="stylesheet" href="{{ "assets/css/editor.css" | absolute_url }}">
 <div id="editor-container"></div>
+<script type="module">
+  import { RubyEditor } from "{{ "assets/editor.js" | absolute_url }}";
+
+  new RubyEditor('editor-container');
+</script>
+

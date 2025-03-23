@@ -1,5 +1,5 @@
 .ruby-playground {
-  margin: 20px 0;
+  margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 4px;
   overflow: hidden;
@@ -15,7 +15,7 @@
   margin: 0;
 }
 #ruby-editor {
-  height: 300px;
+  /*height: 300px;*/
 }
 .output-container {
   background: #f8f8f8;
