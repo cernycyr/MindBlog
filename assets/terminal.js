@@ -59,8 +59,8 @@ class RubyTerminal {
 
   runRuby(code) {
     try {
-      const result = Ruby.eval(code);
-      this.term.write(result[1] + "\r\n");
+      const result = Ruby.rawEval(code);
+      this.term.write(result + "\r\n");
     } catch (err) {
       this.term.write("Error: " + err.message + "\r\n");
     }

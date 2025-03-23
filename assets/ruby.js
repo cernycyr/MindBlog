@@ -60,6 +60,10 @@ class RubyEvaluator {
     }
     return [this.outputArray.join("\n"), lastExpression];
   }
+
+  rawEval(code) {
+    return this.rubyVM.eval(code);
+  }
 }
 
 export const Ruby = new RubyEvaluator();
