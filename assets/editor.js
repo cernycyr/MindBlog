@@ -7,7 +7,30 @@ export class RubyEditor {
     const insertPoint = document.getElementById(containerSelector);
     insertPoint.appendChild(this.createEditor());
 
-    this.initializeCodeMirror();
+    // Load CodeMirror CSS
+    const cmCSS = document.createElement("link");
+    cmCSS.rel = "stylesheet";
+    cmCSS.href =
+      "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.3/codemirror.min.css";
+    document.head.appendChild(cmCSS);
+
+    // Load CodeMirror theme
+    const cmThemeCSS = document.createElement("link");
+    cmThemeCSS.rel = "stylesheet";
+    cmThemeCSS.href =
+      "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.3/theme/dracula.min.css";
+    document.head.appendChild(cmThemeCSS);
+
+    Ruby.initVM()
+      .then(async () => {})
+      .then(async () => {
+        await import(
+          "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.3/mode/ruby/ruby.min.js"
+        );
+      })
+      .then(() => {
+        this.initializeCodeMirror();
+      });
   }
 
   createEditor() {
@@ -28,20 +51,6 @@ export class RubyEditor {
   }
 
   initializeCodeMirror() {
-    // Load CodeMirror CSS
-    const cmCSS = document.createElement("link");
-    cmCSS.rel = "stylesheet";
-    cmCSS.href =
-      "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.3/codemirror.min.css";
-    document.head.appendChild(cmCSS);
-
-    // Load CodeMirror theme
-    const cmThemeCSS = document.createElement("link");
-    cmThemeCSS.rel = "stylesheet";
-    cmThemeCSS.href =
-      "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.3/theme/dracula.min.css";
-    document.head.appendChild(cmThemeCSS);
-
     const editor = CodeMirror(document.getElementById("ruby-editor"), {
       mode: "ruby",
       theme: "dracula",

@@ -7,6 +7,7 @@ class RubyTerminal {
     this.containerId = containerId;
     this.term = null;
     this.init();
+    Ruby.initVM();
   }
 
   async init() {

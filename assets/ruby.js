@@ -8,10 +8,8 @@ import {
 
 class RubyEvaluator {
   constructor() {
-    console.log("Ruby VM initialized");
     this.rubyVM = null;
     this.outputArray = [];
-    this.initVM();
   }
 
   async initVM() {
@@ -50,6 +48,11 @@ class RubyEvaluator {
   }
 
   eval(code) {
+    if (!this.rubyVM) {
+      console.error("Ruby VM not initialized");
+      return;
+    }
+
     this.outputArray = [];
     let lastExpression = "";
     try {
@@ -62,6 +65,11 @@ class RubyEvaluator {
   }
 
   rawEval(code) {
+    if (!this.rubyVM) {
+      console.error("Ruby VM not initialized");
+      return;
+    }
+
     return this.rubyVM.eval(code);
   }
 }
