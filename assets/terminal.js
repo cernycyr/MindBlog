@@ -26,7 +26,7 @@ class RubyTerminal {
       return;
     }
 
-    this.term = new window.Terminal({
+    this.term = new Terminal({
       cursorBlink: true,
       rows: 20,
       cols: 80,

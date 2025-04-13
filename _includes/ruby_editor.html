@@ -1,0 +1,7 @@
+<link rel="stylesheet" href="{{ "assets/css/editor.css" | absolute_url }}">
+<div id="{{include.container_id | default: "editor-container" }}" style="height:{{include.height | default: "100%"}}"></div>
+<script type="module">
+  import { RubyEditor } from "{{ "assets/editor.js" | absolute_url }}";
+
+  new RubyEditor("{{include.container_id | default: "editor-container" }}");
+</script>

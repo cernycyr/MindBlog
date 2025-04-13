@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="{{ "assets/css/floaty.css" | absolute_url }}">
+
+<div id="sticky-footer">
+  <button id="footer-toggle">
+    <img src="{{ '/assets/ruby_icon.svg' | relative_url }}" alt="Ruby Icon">
+    &nbsp;
+    <b>Editor</b>
+  </button>
+  <div id="footer-content">
+    {% include {{ include.content }} %}
+  </div>
+</div>
+
+<script type="module">
+  document.addEventListener("DOMContentLoaded", () => {
+    const footer = document.getElementById("sticky-footer");
+    const button = document.getElementById("footer-toggle");
+
+    button.addEventListener("click", () => {
+      footer.classList.toggle("active");
+      button.classList.toggle("active");
+      document.body.classList.toggle("floaty-active");
+      // button.textContent = footer.classList.contains("active")
+      //   ? "Close"
+      //   : "Try now";
+    });
+  });
+</script>

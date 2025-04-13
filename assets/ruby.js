@@ -13,6 +13,9 @@ class RubyEvaluator {
   }
 
   async initVM() {
+    if (this.rubyVM) {
+      return;
+    }
     const setOutput = (output) => {
       this.outputArray.push(output);
       console.log("[Ruby] " + output);

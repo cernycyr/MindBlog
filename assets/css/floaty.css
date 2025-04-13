@@ -1,0 +1,68 @@
+#sticky-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 30vh;
+  background-color: #f8f9fa;
+  border-top: 1px solid #ddd;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  z-index: 1000;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+  padding: 15px;
+}
+
+#sticky-footer.active {
+  transform: translateY(0);
+}
+
+#footer-toggle {
+  position: absolute;
+  top: -60px;
+  height: 60px;
+  right: 50px;
+  width: fit-content;
+  padding: 10px 15px 0 15px; /* top, right, bottom, left */
+  font-size: 1.5rem;
+  background-color: #f8f9fa; /* Match footer background */
+  border: 1px solid #ddd;
+  border-bottom: none; /* Blend into footer */
+  border-radius: 10px 10px 0 0; /* Rounded top corners */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow */
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  z-index: -1;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease,
+    height 0.5s ease,
+    top 0.5s ease;
+
+  img {
+    background-color: unset;
+    height: 40px;
+  }
+}
+
+#footer-toggle:hover {
+  box-shadow: 5px -5px 8px rgba(255, 0, 0, 0.5);
+  top: -70px;
+  height: 70px;
+}
+
+#footer-toggle.active:hover {
+  top: -50px;
+  height: 50px;
+}
+
+#footer-content {
+  height: 100%;
+}
+
+body.floaty-active {
+  padding-bottom: 30vh; /* Prevent content from being hidden behind the footer */
+}

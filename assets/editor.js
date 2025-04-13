@@ -4,8 +4,8 @@ import { Ruby } from "./ruby.js";
 
 export class RubyEditor {
   constructor(containerSelector) {
-    const insertPoint = document.getElementById(containerSelector);
-    insertPoint.appendChild(this.createEditor());
+    this.mainContainer = document.getElementById(containerSelector);
+    this.mainContainer.appendChild(this.createEditor());
 
     // Load CodeMirror CSS
     const cmCSS = document.createElement("link");
@@ -35,31 +35,36 @@ export class RubyEditor {
 
   createEditor() {
     const editorContainer = document.createElement("div");
+    // TODO: Either remove one leayer of div, or move it into the jekyll include template
     editorContainer.className = "ruby-playground";
     editorContainer.innerHTML = `
-      <div class="editor-header">
-        <h3>Ruby Editor</h3>
-        <button id="run-ruby">Run Code</button>
-      </div>
-      <div id="ruby-editor"></div>
-      <div class="output-container">
-        <div class="output-header">Output:</div>
-        <pre id="ruby-output"></pre>
+      <div class="editor-body">
+        <div id="ruby-editor"></div>
+        <div class="output-container">
+          <div class="editor-header">
+            <div class="output-header">Output:</div>
+            <button id="run-ruby">Run Code</button>
+          </div>
+          <pre id="ruby-output"></pre>
+        </div>
       </div>
     `;
     return editorContainer;
   }
 
   initializeCodeMirror() {
-    const editor = CodeMirror(document.getElementById("ruby-editor"), {
-      mode: "ruby",
-      theme: "dracula",
-      lineNumbers: true,
-      indentUnit: 2,
-      value: '# Type your Ruby code here\nputs "Hello, Ruby!"',
-    });
+    const editor = CodeMirror(
+      this.mainContainer.querySelector("#ruby-editor"),
+      {
+        mode: "ruby",
+        theme: "dracula",
+        lineNumbers: true,
+        indentUnit: 2,
+        value: '# Type your Ruby code here\nputs "Hello, Ruby!"',
+      },
+    );
 
-    const runButton = document.getElementById("run-ruby");
+    const runButton = this.mainContainer.querySelector("#run-ruby");
 
     runButton.addEventListener("click", () => {
       const code = editor.getValue();
@@ -69,7 +74,7 @@ export class RubyEditor {
 
   renderOutput(output) {
     const [stdOutput, lastExpression] = output;
-    document.getElementById("ruby-output").textContent =
+    this.mainContainer.querySelector("#ruby-output").textContent =
       stdOutput + "\n=> " + lastExpression;
   }
 }

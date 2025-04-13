@@ -1,0 +1,16 @@
+<script
+  src="https://cdn.jsdelivr.net/npm/@electric-sql/pglite-repl/dist-webcomponent/Repl.js"
+  type="module"
+></script>
+
+<div style="height: 300px">
+  <pglite-repl id="pg-repl"></pglite-repl>
+</div>
+
+<script type="module">
+  import { PGlite } from "https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js";
+
+  const pg = new PGlite();
+  const repl = document.getElementById("pg-repl");
+  repl.pg = pg;
+</script>
