@@ -1,13 +1,25 @@
 <link rel="stylesheet" href="{{ "assets/css/floaty.css" | absolute_url }}">
 
+{% if include.content == "ruby" %}
+  {% assign fragment = "ruby_editor.html" %}
+  {% assign icon = "assets/ruby_icon.svg" %}
+  {% assign text = "Editor" %}
+  {% assign class = "ruby" %}
+{% elsif include.content == "pg" %}
+  {% assign fragment = "pg_repl.html" %}
+  {% assign icon = "assets/pg_icon.svg" %}
+  {% assign text = "REPL" %}
+  {% assign class = "pg" %}
+{% endif %}
+
 <div id="sticky-footer">
-  <button id="footer-toggle">
-    <img src="{{ '/assets/ruby_icon.svg' | relative_url }}" alt="Ruby Icon">
+  <button class="{{ class }}" id="footer-toggle">
+    <img src="{{ icon | relative_url }}" alt="Icon">
     &nbsp;
-    <b>Editor</b>
+    <b>{{ text }}</b>
   </button>
   <div id="footer-content">
-    {% include {{ include.content }} %}
+    {% include {{ fragment }} id="in_floater" insert_script=include.insert_script %}
   </div>
 </div>
 
@@ -20,9 +32,6 @@
       footer.classList.toggle("active");
       button.classList.toggle("active");
       document.body.classList.toggle("floaty-active");
-      // button.textContent = footer.classList.contains("active")
-      //   ? "Close"
-      //   : "Try now";
     });
   });
 </script>

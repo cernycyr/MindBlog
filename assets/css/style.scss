@@ -28,6 +28,14 @@
     box-shadow 0.3s ease;
 }
 
+.card.db_article {
+  background: radial-gradient(
+    circle at top right,
+    rgba(51, 103, 145, 0.4),
+    #ffffff 10%
+  );
+}
+
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -40,6 +48,15 @@
 
 .card-content {
   padding: 1rem;
+  h2 {
+    display: flex;
+    justify-content: space-between;
+
+    img {
+      height: 30px;
+      background: unset;
+    }
+  }
 }
 
 .card h2 {
@@ -49,3 +66,7 @@
 .card p {
   margin: 0;
 }
+
+// :root {
+//   --PGliteRepl-font-size: 1rem;
+// }

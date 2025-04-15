@@ -14,10 +14,14 @@ title: Náhodné texty o náhodných tématech
 
 <ul class="card-list">
   {% for item in site.articles reversed %}
-  <li class="card">
+  <li class="card {{item.layout}}">
     <a href="{{ item.url | relative_url }}">
       <div class="card-content">
-        <h2 class="no-anchor">{{ item.title }}</h2>
+        {% if item.layout == "db_article" %}
+          <h2 class="no-anchor">{{ item.title }} <img src="{{ "assets/pg_icon.svg" | relative_url }}" alt="Icon" /></h2>
+        {% else %}
+          <h2 class="no-anchor">{{ item.title }}</h2>
+        {% endif %}
         <p>{{ item.excerpt }}</p>
       </div>
     </a>

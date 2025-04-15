@@ -3,14 +3,15 @@
   type="module"
 ></script>
 
-<div style="height: 300px">
-  <pglite-repl id="pg-repl"></pglite-repl>
+<div style="height:{{include.height | default: "100%"}}">
+  <pglite-repl id="{{ include.id | default: "pg-repl" }}"></pglite-repl>
 </div>
 
 <script type="module">
   import { PGlite } from "https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js";
 
   const pg = new PGlite();
-  const repl = document.getElementById("pg-repl");
+  await pg.exec(`{{ include.insert_script | default: "" }}`);
+  const repl = document.getElementById("{{ include.id | default: "pg-repl" }}");
   repl.pg = pg;
 </script>

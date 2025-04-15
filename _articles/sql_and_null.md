@@ -1,7 +1,25 @@
 ---
 title: SQL a NULL
-layout: article
+layout: db_article
 date: 2025-02-25
+insert_script: |
+  CREATE TABLE stuff (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    source VARCHAR(10)
+  );
+
+  INSERT INTO stuff (name, source) VALUES
+  ('Alice', 'phone'),
+  ('Bob', NULL),
+  ('Charlie', 'phone'),
+  ('David', NULL),
+  ('Eve', 'web'),
+  ('Frank', 'email'),
+  ('Grace', 'web'),
+  ('Hank', 'phone'),
+  ('Ivy', 'email'),
+  ('Jack', NULL);
 ---
 
 Jak v SQL porovnáváme NULL hodnoty? Opravdu si vystačíme s `IS (NOT) NULL`? Nemůže nás `NULL` nemile překvapit?
@@ -11,23 +29,7 @@ Mnozí si jistě pamatují ze škol či různých školení a studijních materi
 Vytvořme si jednoduchou tabulku a rovnou přidáme nějaká data
 
 ```sql
-CREATE TABLE stuff (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    source VARCHAR(10)
-);
-
-INSERT INTO stuff (name, source) VALUES
-('Alice', 'phone'),
-('Bob', NULL),
-('Charlie', 'phone'),
-('David', NULL),
-('Eve', 'web'),
-('Frank', 'email'),
-('Grace', 'web'),
-('Hank', 'phone'),
-('Ivy', 'email'),
-('Jack', NULL);
+{{ page.insert_script }}
 ```
 
 Tedy mějme tuto jednoduchou tabulku
